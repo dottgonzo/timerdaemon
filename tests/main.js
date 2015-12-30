@@ -1,5 +1,12 @@
-var timerdaemon=require('../index.js'),
-verb=require('verbo');
+var timerdaemon=require('../index.js');
 
-timerdaemon.pre(5555,function(){verb("completed after 5555","verbose","1test")});
-timerdaemon.post(5555,function(){verb("completed after 5555","debug","1test")});
+var val1=1000
+var val2=2000
+timerdaemon.pre(5555,function(){
+    console.log("completed pre after 5555",val1)
+    val1=val1+1
+    });
+timerdaemon.post(5555,function(){
+    console.log("completed post after 5555",val2)
+        val2=val2+1
+    });
