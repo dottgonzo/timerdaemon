@@ -1,36 +1,35 @@
 {
-  "name": "timerdaemon",
-  "version": "0.0.3",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "node ./tests/main.js",
-    "hw": "git add -A && git commit -m 'oki'&&npm version patch -m patch&&git add -A && git commit --amend -C HEAD&& git push&&npm publish",
-    "patch": "npm version patch -m patch&&git add -A && git commit --amend -C HEAD&& git push&&npm publish"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dottgonzo/timerdaemon.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dottgonzo/timerdaemon/issues"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "chai": "^3.4.1",
-    "gulp": "^3.9.0",
-    "gulp-bump": "^1.0.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-filter": "^3.0.1",
-    "gulp-git": "^1.6.1",
-    "gulp-mocha": "^2.2.0",
-    "gulp-prompt": "^0.1.2",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-tag-version": "^1.3.0",
-    "gulp-typescript": "^2.10.0",
-    "mocha": "^2.3.4",
-    "verbo": "0.0.7"
-  }
+    "name": "timerdaemon",
+    "version": "0.0.4",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "node_modules/.bin/mocha",
+        "prepublish": "npm test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dottgonzo/timerdaemon.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/dottgonzo/timerdaemon/issues"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "chai": "^3.4.1",
+        "gulp": "^3.9.0",
+        "gulp-bump": "^1.0.0",
+        "gulp-concat": "^2.6.0",
+        "gulp-filter": "^3.0.1",
+        "gulp-git": "^1.6.1",
+        "gulp-mocha": "^2.2.0",
+        "gulp-prompt": "^0.1.2",
+        "gulp-sourcemaps": "^1.6.0",
+        "gulp-tag-version": "^1.3.0",
+        "gulp-typescript": "^2.10.0",
+        "mocha": "^2.3.4",
+        "verbo": "0.0.7"
+    }
 }
