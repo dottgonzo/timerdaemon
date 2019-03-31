@@ -17,33 +17,16 @@ export function post(fun: () => Promise<any>, time: number, options?: {}) {
   }
   repeater()
 }
-export function pre(fun: () => Promise<any>, time: number, options?: {}) {
-  fun().then(() => {
-    post(fun, time, options);
-  }).catch((err) => {
-    post(fun, time, options);
-  })
+export function preSync(fun: () => void, time: number, options?: {}) {
+  fun()
+  postSync(fun, time, options)
 }
-export function pre(fun: () => Promise<any>, time: number, options?: {}) {
-  fun().then(() => {
-    post(fun, time, options);
-  }).catch((err) => {
-    post(fun, time, options);
-  })
-}
-
-let timerdaemon = {
-  pre: function (time: number, callback: Function) {
-    callback();
-    setTimeout(function () {
-      timerdaemon.pre(time, callback);
-    }, time);
-  },
-  post: function (time: number, callback: Function) {
-    setTimeout(function () {
-      callback();
-      timerdaemon.post(time, callback);
-    }, time);
+export function postSync(fun: () => void, time: number, options?: {}) {
+  function repeater() {
+    setTimeout(() => {
+      fun()
+      repeater()
+    }, time)
   }
-};
-export =timerdaemon
+  repeater()
+}

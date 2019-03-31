@@ -7,12 +7,12 @@ let valpre = 0
 let valpost = 0
 
 
-timerdaemon.pre(1000, function() {
+timerdaemon.preSync(() => {
     valpre = valpre + 1
-});
-timerdaemon.post(1000, function() {
+},1000);
+timerdaemon.postSync(() => {
     valpost = valpost + 1
-});
+},1000);
 
 
 describe("timerdaemon", function() {
