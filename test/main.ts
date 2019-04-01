@@ -3,29 +3,57 @@ import { expect } from 'chai'
 import * as timerdaemon from '../index'
 
 describe('timerdaemon', () => {
-  describe('pre', () => {
-    it('after 3.1 seconds pre function was executed 4 times', (done) => {
+  describe('pre Sync', () => {
+    it('after 9.1 seconds pre function was executed 10 times', (done) => {
       let valpre = 0
       timerdaemon.preSync(() => {
-        valpre = valpre + 1
+        valpre++
       }, 1000)
       setTimeout(() => {
-        expect(valpre).to.be.deep.equal(4)
+        expect(valpre).to.be.deep.equal(10)
         done()
-      }, 3100)
+      }, 9100)
     })
   })
 
-  describe('post', () => {
-    it('after 2.9 seconds post function was executed 2 times', (done) => {
+  describe('post Sync', () => {
+    it('after 9.9 seconds post function was executed 8 times', (done) => {
       let valpost = 0
       timerdaemon.postSync(() => {
-        valpost = valpost + 1
+        valpost++
       }, 1000)
       setTimeout(() => {
-        expect(valpost).to.be.deep.equal(2)
+        expect(valpost).to.be.deep.equal(9)
         done()
-      }, 2900)
+      }, 9900)
+    })
+  })
+
+  describe('pre Async', () => {
+    it('after 9.1 seconds post function was executed 10 times', (done) => {
+      let valpre = 0
+      const test = async () => {
+        valpre++
+      }
+      timerdaemon.pre(test, 1000)
+      setTimeout(() => {
+        expect(valpre).to.be.deep.equal(10)
+        done()
+      }, 9100)
+    })
+  })
+
+  describe('post Async', () => {
+    it('after 3.9 seconds post function was executed 8 times', (done) => {
+      let valpost = 0
+      const test = async () => {
+        valpost++
+      }
+      timerdaemon.post(test, 1000)
+      setTimeout(() => {
+        expect(valpost).to.be.deep.equal(9)
+        done()
+      }, 9900)
     })
   })
 

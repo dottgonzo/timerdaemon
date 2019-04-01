@@ -1,8 +1,8 @@
-export async function pre(fun: () => Promise<any>, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => void }) {
+export async function pre(fun: () => Promise<void>, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => void }) {
   await asyncFunction(fun, options)
   await post(fun, time, options)
 }
-export async function post(fun: () => Promise<any>, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => void }) {
+export async function post(fun: () => Promise<void>, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
   async function repeater() {
     setTimeout(async () => {
       await asyncFunction(fun, options)
@@ -12,7 +12,7 @@ export async function post(fun: () => Promise<any>, time: number, options?: { on
   await repeater()
 }
 
-async function asyncFunction(fun: () => Promise<any>, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => void }) {
+async function asyncFunction(fun: () => Promise<void>, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => void }) {
 
   fun().then((result) => {
     if (options && options.onSuccess) return options.onSuccess(result)
