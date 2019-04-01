@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha",
-    "prepublish": "npm test",
+    "test": "./node_modules/.bin/mocha --timeout 5000 --exit",
     "build": "./node_modules/typescript/bin/tsc",
     "watch-ts": "./node_modules/typescript/bin/tsc -w",
     "release:major": "npm version major && git push origin && git push origin --tags",
@@ -23,9 +22,10 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "chai": "^3.4.1",
-    "mocha": "^2.3.4",
-    "typescript": "^3.4.1",
-    "verbo": "0.0.7"
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2",
+    "typescript": "^3.4.1"
   }
 }
