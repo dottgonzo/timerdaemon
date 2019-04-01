@@ -12,7 +12,7 @@ export async function post(fun: () => Promise<any>, time: number, options?: { on
   await repeater()
 }
 
-async function asyncFunction(fun: () => Promise<any>, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => void }){
+async function asyncFunction(fun: () => Promise<any>, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => void }) {
 
   fun().then((result) => {
     if (options && options.onSuccess) return options.onSuccess(result)
