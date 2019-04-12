@@ -1,8 +1,8 @@
-export async function pre(fun: () => Promise<void>, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => void }) {
+export async function pre(fun: () => Promise<any>, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
   await asyncFunction(fun, options)
   await post(fun, time, options)
 }
-export async function post(fun: () => Promise<void>, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
+export async function post(fun: () => Promise<any>, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
   async function repeater() {
     setTimeout(async () => {
       await asyncFunction(fun, options)
@@ -12,7 +12,7 @@ export async function post(fun: () => Promise<void>, time: number, options?: { o
   await repeater()
 }
 
-async function asyncFunction(fun: () => Promise<void>, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => void }) {
+async function asyncFunction(fun: () => Promise<any>, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
 
   fun().then((result) => {
     if (options && options.onSuccess) return options.onSuccess(result)
@@ -24,11 +24,11 @@ async function asyncFunction(fun: () => Promise<void>, options?: { onError?: (er
 
 }
 
-export function preSync(fun: () => void, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => void }) {
+export function preSync(fun: () => void, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
   syncFunction(fun, options)
   postSync(fun, time, options)
 }
-export function postSync(fun: () => void, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => void }) {
+export function postSync(fun: () => void, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
   function repeater() {
     setTimeout(() => {
       syncFunction(fun, options)
