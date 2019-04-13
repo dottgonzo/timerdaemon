@@ -5,12 +5,11 @@ import * as timerdaemon from '../index'
 describe('async', () => {
 
   describe('pre Async', () => {
-    it('after 9.1 seconds post function was executed 10 times', (done) => {
+    it('after 8.5 seconds post function was executed 3 times', (done) => {
       let valpre = 0
       const test = () => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            console.log('pre' + valpre)
             valpre++
             resolve()
 
@@ -21,17 +20,16 @@ describe('async', () => {
       setTimeout(() => {
         expect(valpre).to.be.deep.equal(3)
         done()
-      }, 9100)
+      }, 8500)
     })
   })
 
   describe('post Async', () => {
-    it('after 9.9 seconds post function was executed 9 times', (done) => {
+    it('after 8.5 seconds post function was executed 2 times', (done) => {
       let valpost = 0
       const test = () => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            console.log('post' + valpost)
             valpost++
             resolve()
 
@@ -40,9 +38,9 @@ describe('async', () => {
       }
       timerdaemon.post(test, 1000)
       setTimeout(() => {
-        expect(valpost).to.be.deep.equal(3)
+        expect(valpost).to.be.deep.equal(2)
         done()
-      }, 9900)
+      }, 8500)
     })
   })
 
