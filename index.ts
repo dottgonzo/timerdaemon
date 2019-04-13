@@ -1,27 +1,36 @@
-export async function pre(fun: () => Promise<any>, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
-  await asyncFunction(fun, options)
-  await post(fun, time, options)
+import { resolve } from "path";
+
+export function pre(fun: () => Promise<any>, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
+    asyncFunction(fun, options).then(() => {
+      post(fun, time, options)
+    }).catch(() => {
+      post(fun, time, options)
+    })
 }
-export async function post(fun: () => Promise<any>, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
-  async function repeater() {
-    await setTimeout(async () => {
-      await asyncFunction(fun, options)
-      await repeater()
-    }, time)
-  }
-  await repeater()
+export function post(fun: () => Promise<any>, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
+    function repeater() {
+      setTimeout(() => {
+        asyncFunction(fun, options).then(() => {
+          repeater()
+        }).catch((err) => {
+          repeater()
+        })
+      }, time)
+    }
+    repeater()
 }
 
-async function asyncFunction(fun: () => Promise<any>, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
+function asyncFunction(fun: () => Promise<any>, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
+  return new Promise((resolve, reject) => {
+    fun().then((answer) => {
+      if (options && options.onSuccess) options.onSuccess(answer)
+      resolve(answer)
+    }).catch((err) => {
+      if (options && options.onError) options.onError(err)
+      reject(err)
+    })
 
-  fun().then((result) => {
-    if (options && options.onSuccess) return options.onSuccess(result)
-    return true
-  }).catch((err) => {
-    if (options && options.onError) return options.onError(err)
-    return false
   })
-
 }
 
 export function preSync(fun: () => void, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
