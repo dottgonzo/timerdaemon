@@ -4,7 +4,7 @@ export async function pre(fun: () => Promise<any>, time: number, options?: { onE
 }
 export async function post(fun: () => Promise<any>, time: number, options?: { onError?: (err: Error) => void, onSuccess?: (result: any) => any }) {
   async function repeater() {
-    setTimeout(async () => {
+    await setTimeout(async () => {
       await asyncFunction(fun, options)
       await repeater()
     }, time)

@@ -18,7 +18,7 @@ function post(fun, time, options) {
     return __awaiter(this, void 0, void 0, function* () {
         function repeater() {
             return __awaiter(this, void 0, void 0, function* () {
-                setTimeout(() => __awaiter(this, void 0, void 0, function* () {
+                yield setTimeout(() => __awaiter(this, void 0, void 0, function* () {
                     yield asyncFunction(fun, options);
                     yield repeater();
                 }), time);

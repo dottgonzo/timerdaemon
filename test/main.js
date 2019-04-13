@@ -48,7 +48,7 @@ describe('timerdaemon', () => {
         });
     });
     describe('post Async', () => {
-        it('after 3.9 seconds post function was executed 8 times', (done) => {
+        it('after 9.9 seconds post function was executed 9 times', (done) => {
             let valpost = 0;
             const test = () => __awaiter(this, void 0, void 0, function* () {
                 valpost++;

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --timeout 5000 --exit",
+    "test": "./node_modules/.bin/mocha --timeout 50000 --exit",
     "build": "./node_modules/typescript/bin/tsc",
     "watch-ts": "./node_modules/typescript/bin/tsc -w",
     "release:major": "npm version major && git push origin && git push origin --tags",
